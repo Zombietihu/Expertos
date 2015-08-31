@@ -36,6 +36,7 @@ public class Principal extends JFrame {
     int fut = 0;
     int beis = 0;
     int playa = 0;
+    int prioridad=0;
     public Principal(){
         iniciar();
         setSize(500, 300);
@@ -169,7 +170,7 @@ public class Principal extends JFrame {
                 pregunta.setText("Su diseño de material es: ");
                 break;
             case 9:
-                if((beis>fut)&&(beis>playa)){
+                if(((beis>fut)&&(beis>playa))||((beis==fut)&&((prioridad==1)||(prioridad==3)))||((beis==playa)&&((prioridad == 1)||(prioridad==2)))){
                     //decir que es un cuadrado
                  ImageIcon imageBeis = new ImageIcon(this.getClass().getResource("/imagen/beis.gif"));  
                 JLabel labelB = new JLabel();  
@@ -184,6 +185,10 @@ public class Principal extends JFrame {
                 nuevo.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                     ban =0;
+                    fut=0;
+                    beis=0;
+                    playa=0;
+                    prioridad=0;
                     panel.removeAll();
                     setPreguntas();
                     }
@@ -195,7 +200,7 @@ public class Principal extends JFrame {
                 panel.add(nuevo);
                 panel.repaint();
                 }else{
-                    if((fut>beis)&&(fut>playa)){
+                    if(((fut>beis)&&(fut>playa))||((fut==beis)&&((prioridad==2)||(prioridad==3)))||((fut==playa)&&((prioridad==2)||(prioridad==1)))){
                         //decir que es un cuadrado
                  ImageIcon imageFut = new ImageIcon(this.getClass().getResource("/imagen/fut.gif"));  
                 JLabel labelF = new JLabel();  
@@ -221,7 +226,7 @@ public class Principal extends JFrame {
                 panel.add(nuevo);
                 panel.repaint();
                     }else{
-                        if((playa>beis)&&(playa>fut)){
+                        if(((playa>beis)&&(playa>fut))||((playa==beis)&&((prioridad==3)||(prioridad==2)))||((playa==fut)&&((prioridad==3)||(prioridad==1)))){
                             //decir que es un cuadrado
                  ImageIcon imagePlaya = new ImageIcon(this.getClass().getResource("/imagen/playa.gif"));  
                 JLabel labelP = new JLabel();  
@@ -357,13 +362,16 @@ public class Principal extends JFrame {
                  if(combo.getSelectedIndex()==0){
                      ban=7;
                      beis++;
+                     prioridad=1;
                  }else{
                      if(combo.getSelectedIndex()==1){
                          ban=7;
                          fut++;
+                         prioridad=2;
                      }else{
                          ban=7;
                          playa++;
+                         prioridad=3;
                      }
                  }
                  break;

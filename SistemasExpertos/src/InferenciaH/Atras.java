@@ -94,54 +94,63 @@ public class Atras {
     public boolean evaluaReglas(String r){
         switch(r){
             case "r1":
+                try{pw.write("Se esta evaluando la regla: "+r+"\n");}catch(Exception e){}
                 if(evalua("h8")&&evalua("h6")&&evalua("h5")){
                     return true;
                 }else{
                     return false;
                 }
             case "r2": 
+                 try{pw.write("Se esta evaluando la regla: "+r+"\n");}catch(Exception e){}
                 if(evalua(r2.get(0))&&evalua(r2.get(1))){
                     return true;
                 }else{
                     return false;
                 }
             case "r3":
+                 try{pw.write("Se esta evaluando la regla: "+r+"\n");}catch(Exception e){}
                  if(evalua(r3.get(0))&&evalua(r3.get(1))){
                     return true;
                 }else{
                     return false;
                 }
             case "r4":      
+                 try{pw.write("Se esta evaluando la regla: "+r+"\n");}catch(Exception e){}
                  if(evalua(r4.get(0))){
                     return true;
                 }else{
                     return false;
                 }
             case "r5":
+                 try{pw.write("Se esta evaluando la regla: "+r+"\n");}catch(Exception e){}
                  if(evalua(r5.get(0))){
                     return true;
                 }else{
                     return false;
                 }
             case "r6":  
+                 try{pw.write("Se esta evaluando la regla: "+r+"\n");}catch(Exception e){}
                  if(evalua(r6.get(0))&&evalua(r6.get(1))){
                     return true;
                 }else{
                     return false;
                 }
             case "r7":
+                 try{pw.write("Se esta evaluando la regla: "+r+"\n");}catch(Exception e){}
                  if(evalua(r7.get(0))){
                     return true;
                 }else{
                     return false;
                 }
             case "r8":  
+                 try{pw.write("Se esta evaluando la regla: "+r+"\n");}catch(Exception e){}
                  if(evalua(r8.get(0))&&evalua(r8.get(1))){
                     return true;
                 }else{
                     return false;
                 }
             case "r9":
+                 try{pw.write("Se esta evaluando la regla: "+r+"\n");}catch(Exception e){}
                  if(evalua(r9.get(0))&&evalua(r9.get(1))){
                     return true;
                 }else{
@@ -154,6 +163,7 @@ public class Atras {
         if(baseConocimiento.contains(h)){
             return true;
         }else{
+             try{pw.write("El nuevo sub objetivo es: "+h+"\n");}catch(Exception e){}
             if(subObjetivo(h)){
                 return true;
             }else{

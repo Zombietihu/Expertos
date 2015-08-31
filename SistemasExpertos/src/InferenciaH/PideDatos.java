@@ -186,6 +186,7 @@ public class PideDatos extends JFrame{
              if(objetivo.getSelectedIndex() == 6){h = "h7";}
              if(objetivo.getSelectedIndex() == 7){h = "h8";}
              if(objetivo.getSelectedIndex() == 8){h = "h9";}
+             consola.setText("");
              consola.append("run:"+"\n");
              at = new Atras(bcc, h);
              setConsola();

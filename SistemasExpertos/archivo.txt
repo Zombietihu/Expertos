@@ -1,1 +1,14 @@
+Se esta evaluando la regla: r2
+El nuevo sub objetivo es: h6
+Se esta evaluando la regla: r7
+El nuevo sub objetivo es: h3
+Se esta evaluando la regla: r3
+El nuevo sub objetivo es: h4
+Se esta evaluando la regla: r1
+El nuevo sub objetivo es: h6
+Se esta evaluando la regla: r7
+El nuevo sub objetivo es: h5
+Se esta evaluando la regla: r5
+El nuevo sub objetivo es: h6
+Se esta evaluando la regla: r7
 Objetivo Alcanzable
