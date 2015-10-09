@@ -3,22 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pelostas;
+package heuristicavoraz;
 
 /**
  *
  * @author Tonatihu
  */
-public class Pelostas {
+public class HeuristicaVoraz {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Buscar b = new Buscar();
-        b.setVisible(true);
-        
+        Interface i = new Interface();
     }
     
 }

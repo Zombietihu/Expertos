@@ -3,22 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pelostas;
+package transforms;
 
 /**
  *
  * @author Tonatihu
  */
-public class Pelostas {
+public class Transforms {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Buscar b = new Buscar();
-        b.setVisible(true);
-        
     }
     
 }
