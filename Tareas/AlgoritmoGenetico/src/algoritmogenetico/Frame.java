@@ -22,7 +22,7 @@ public class Frame extends JFrame{
     //Panel
     JPanel pane;
     //Texto de area para mostrar procedimiento
-    JTextArea genX;
+    JTextArea  genX = new JTextArea();
     JTextArea genY;
     //Botones para empezar y nuevo
     JButton empezar;
@@ -34,8 +34,10 @@ public class Frame extends JFrame{
     JLabel selecciona;
     //Seleccionar las generaciones
     JComboBox generaciones;
+    //Strings
+    String cadena;
     
-    public Frame(){
+    public void Frame(){
         init();
         setTitle("Algoritmo Genético");
         setSize(760,500);
@@ -50,7 +52,7 @@ public class Frame extends JFrame{
         funcion = new JLabel("f(x,y)=x^2+y^3  1<=x<=32 1<=y<=32");
         funcion.setBounds(300,20,300,20);
         //se agregan los JTextArea
-        genX = new JTextArea();
+       
         genX.setBounds(20,80,250,200);
         genX.setEnabled(false);
         genY = new JTextArea();
@@ -74,6 +76,7 @@ public class Frame extends JFrame{
         empezar.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
               //Aqui iniciaremos los hilos
+                iniciarHilos();
             }
         });
         nuevo = new JButton();
@@ -87,5 +90,19 @@ public class Frame extends JFrame{
         pane.add(procesoX);
         pane.add(procesoY);
         pane.add(selecciona);
+    }
+    
+    public void iniciarHilos(){
+        //Se obtienen las generaciones 
+        int e = generaciones.getSelectedIndex()+1;
+        //se hace la instancia de los procesos X y Y
+        ProcesoX x = new ProcesoX(e);
+        //Se inician los hilos
+        x.start();
+        
+    }
+    
+     public void setTextX(String cadena){
+        genX.append(cadena);
     }
 }
