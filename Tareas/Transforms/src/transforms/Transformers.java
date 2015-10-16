@@ -3,6 +3,7 @@ package transforms;
 import java.awt.*;
 
 import java.awt.geom.*;
+import javax.swing.JOptionPane;
 
 public abstract class Transformers
 
@@ -11,18 +12,23 @@ public abstract class Transformers
   Shape mAxes, mShape; //dos objetos de tipo Shape (forma)
 
   int mLength = 54, mArrowLength = 4, mTickSize = 4;
-
+  
+  double theta;
   
 
   public Transformers() {
-
+ 
+    
+        
     mAxes = createAxes();
 
     mShape = createShape();
 
   }
 
-  
+  public void Transformesr(double angulo){
+      theta = angulo;
+  }
 
   protected Shape createAxes() {
 
@@ -149,11 +155,14 @@ public abstract class Transformers
 
     g2.draw(mShape);
 
-    
+     AffineTransform a = new AffineTransform() ;
 
     // Transforma los Graphics2D.
-
-    g2.transform(getTransform());
+    JOptionPane.showMessageDialog(null, "Hola: " + theta);
+      a.setToRotation(theta);
+      a.scale(2, 2);
+      
+    g2.transform(a);
 
     
 

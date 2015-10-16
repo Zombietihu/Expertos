@@ -84,12 +84,14 @@ public class ProcesoX extends Thread{
     public void run(){
         f= new Frame();
         poblacionInicial();
-        setTextArea();
-        seleccionaVs();
-        crearHijos();
-        llenaArchivo();
-        seleccionaHijosGrandes();  
-        laNuevaGeneracion();
+        for(int t=0;t<generaciones;t++){
+            setTextArea();
+            seleccionaVs();
+            crearHijos();
+            llenaArchivo();
+            seleccionaHijosGrandes();  
+            laNuevaGeneracion();
+        }
     }
     private void crearHijos(){
         //Hijos Padre1 y Padre6
@@ -157,6 +159,8 @@ public class ProcesoX extends Thread{
         cromosoma6 = (ArrayList<Integer>)hijos.get(tmpDecimal.indexOf(tmp2.get(tmp2.size()-1))).clone();
         System.out.print("\n"+"Los cromosomas mutados son: "+"\n");
         llenaArchivo();
+        limpiarTmp();
+        
         //limpiar todos los temporales
         /*
         ** Tengo que limpiar todos los temporales 
@@ -167,6 +171,12 @@ public class ProcesoX extends Thread{
         ** NOTA2: agregar for :P
         */
         
+    }
+    private void limpiarTmp(){
+        tmp1.clear();
+        tmp2.clear();
+        valorDecimal.clear();
+        tmpDecimal.clear();
     }
     private void poblacionInicial(){
         //se inicia el random
