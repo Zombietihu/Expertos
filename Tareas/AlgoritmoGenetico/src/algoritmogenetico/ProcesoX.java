@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -20,8 +22,14 @@ public class ProcesoX extends Thread{
     //Para el archivo
     FileWriter fichero = null;
     PrintWriter pw = null;
+    JTextArea consola = new JTextArea();
+    JLabel labelP = new JLabel();
     //Para lo que seran las generaciones
     int generaciones;
+    int hijoMasPoderoso=0;
+   
+    //Hilos Esperar
+    private Esperar wait;
     //Arrays para lo que seran los Cromosomas
     ArrayList<Integer> cromosoma1;
     ArrayList<Integer> cromosoma2;
@@ -51,8 +59,12 @@ public class ProcesoX extends Thread{
     //Para ya no se pero lo ocupo xD
     ArrayList<ArrayList> hijos;
     Frame f;
-    public ProcesoX(int generaciones){
+    Total tot = new Total();
+    public ProcesoX(Esperar wait, int generaciones, JTextArea tuberia,JLabel peso){
+        this.labelP=peso; 
         this.generaciones = generaciones;
+        this.consola = tuberia;
+        this.wait = wait;
         cromosoma1 = new ArrayList<>();
         cromosoma2 = new ArrayList<>();
         cromosoma3 = new ArrayList<>();
@@ -83,6 +95,7 @@ public class ProcesoX extends Thread{
     @Override
     public void run(){
         f= new Frame();
+        consola.append("Estoy dentro de ProcesoX");
         poblacionInicial();
         for(int t=0;t<generaciones;t++){
             setTextArea();
@@ -90,8 +103,19 @@ public class ProcesoX extends Thread{
             crearHijos();
             llenaArchivo();
             seleccionaHijosGrandes();  
+            consola.append("\n");
+            consola.append("El hijo mas fuerte es:"+hijoMasPoderoso);
+            labelP.setText(Integer.toString(hijoMasPoderoso));
+            tot.setX(hijoMasPoderoso);
             laNuevaGeneracion();
+            wait.esperaY(consola);
+            if(hijoMasPoderoso==31){
+                tot.setX(hijoMasPoderoso);
+                break;
+            }
+            
         }
+        this.stop();
     }
     private void crearHijos(){
         //Hijos Padre1 y Padre6
@@ -157,7 +181,10 @@ public class ProcesoX extends Thread{
         cromosoma4 = (ArrayList<Integer>)hijos.get(tmpDecimal.indexOf(tmp2.get(tmp2.size()-3))).clone();
         cromosoma5 = (ArrayList<Integer>)hijos.get(tmpDecimal.indexOf(tmp2.get(tmp2.size()-2))).clone();
         cromosoma6 = (ArrayList<Integer>)hijos.get(tmpDecimal.indexOf(tmp2.get(tmp2.size()-1))).clone();
-        System.out.print("\n"+"Los cromosomas mutados son: "+"\n");
+        //System.out.print("\n"+"Los cromosomas mutados son: "+"\n");
+        consola.append("\n");
+        consola.append("Los cromosomas mutados son: ");
+        consola.append("\n");
         llenaArchivo();
         limpiarTmp();
         
@@ -202,12 +229,18 @@ public class ProcesoX extends Thread{
         valorDecimal.add(valorDecimal(cromosoma4));
         valorDecimal.add(valorDecimal(cromosoma5));
         valorDecimal.add(valorDecimal(cromosoma6));
-        System.out.println("La poblacion inicial es: ");
+        //System.out.println("La poblacion inicial es: ");
+        consola.append("\n");
+        consola.append("La poblacion inicial es:");
+        consola.append("\n");
         llenaArchivo();
-        System.out.print("\n");
+        //System.out.print("\n");
+        consola.append("\n");
         int i=0;
          while(i<6){
-            System.out.print(valorDecimal.get(i)+"\t");
+          //  System.out.print(valorDecimal.get(i)+"\t");
+            consola.append(Integer.toString(valorDecimal.get(i)));
+            consola.append("\t");
             i++;
         }
        
@@ -248,11 +281,13 @@ public class ProcesoX extends Thread{
             cromosoma6.clear();
             cromosoma6 = (ArrayList<Integer>) cromosoma5.clone();
         }
-        else if((int)valorDecimal.get(6)==(int)valorDecimal.get(5)){
+        else if((int)valorDecimal.get(4)==(int)valorDecimal.get(5)){
             cromosoma6.clear();
             cromosoma6 = (ArrayList<Integer>) cromosoma5.clone();
         } 
-        System.out.println("\n"+"La poblacion mas fuerte es: ");
+        //System.out.println("\n"+"La poblacion mas fuerte es: ");
+        consola.append("\n");
+        consola.append("La poblacion mas fuerte es: ");
     }
     
     private void seleccionaHijosGrandes(){
@@ -262,10 +297,15 @@ public class ProcesoX extends Thread{
             tmpDecimal.add(valorDecimal(hijos.get(i+2)));
             tmpDecimal.add(valorDecimal(hijos.get(i+3)));
         }
-        System.out.print("\n"+"Los hijos resultantes son: "+"\n");
+        //System.out.print("\n"+"Los hijos resultantes son: "+"\n");
+        consola.append("\n");
+        consola.append("Los hijos resultantes son: ");
+        consola.append("\n");
         int i=0;
          while(i<12){
-            System.out.print(tmpDecimal.get(i)+"\t");
+          //  System.out.print(tmpDecimal.get(i)+"\t");
+            consola.append(Integer.toString(tmpDecimal.get(i)));
+            consola.append("\t");
             i++;
         }
         //obtenemos los 6 mayores 
@@ -281,12 +321,22 @@ public class ProcesoX extends Thread{
                 }
             }
         }
-        System.out.print("\n"+"Los hijos no repetidos son: "+"\n");
+        //Se checa que los hermanos no sean iguales
+        
+      //  System.out.print("\n"+"Los hijos no repetidos son: "+"\n");
+        consola.append("\n");
+        consola.append("Los hijos no repetidos son: ");
+        consola.append("\n");
         i=0;
          while(i<tmp2.size()){
-            System.out.print(tmp2.get(i)+"\t");
+            //System.out.print(tmp2.get(i)+"\t");
+            consola.append(Integer.toString(tmp2.get(i)));
+            consola.append("\t");
             i++;
         } 
+         if(hijoMasPoderoso<tmp2.get(tmp2.size()-1)){
+            hijoMasPoderoso = tmp2.get(tmp2.size()-1);
+         }
         
     }
     
@@ -303,41 +353,55 @@ public class ProcesoX extends Thread{
         
     }
     public void llenaArchivo(){
-        System.out.print("\n");
+        //System.out.print("\n");
+        consola.append("\n");
         int i=0;
          while(i<5){
-            System.out.print(cromosoma1.get(i));
+          //  System.out.print(cromosoma1.get(i));
+            consola.append(Integer.toString(cromosoma1.get(i)));
             i++;
         }
-        System.out.print("\n");
+        //System.out.print("\n");
+        consola.append("\n");
         i=0;
          while(i<5){
-            System.out.print(cromosoma2.get(i));
+          //  System.out.print(cromosoma2.get(i));
+            consola.append(Integer.toString(cromosoma2.get(i)));
             i++;
         }
-        System.out.print("\n");
+        //System.out.print("\n");
+        consola.append("\n");
         i=0;
          while(i<5){
-            System.out.print(cromosoma3.get(i));
+          //  System.out.print(cromosoma3.get(i));
+            consola.append(Integer.toString(cromosoma3.get(i)));
             i++;
         } 
-        System.out.print("\n");
+        //System.out.print("\n");
+        consola.append("\n");
         i=0;
          while(i<5){
-            System.out.print(cromosoma4.get(i));
+          //  System.out.print(cromosoma4.get(i));
+            consola.append(Integer.toString(cromosoma4.get(i)));
             i++;
         } 
-        System.out.print("\n");
+        //System.out.print("\n");
+        consola.append("\n");
         i=0;
          while(i<5){
-            System.out.print(cromosoma5.get(i));
+          //  System.out.print(cromosoma5.get(i));
+            consola.append(Integer.toString(cromosoma5.get(i)));
             i++;
         } 
-        System.out.print("\n");
+        //System.out.print("\n");
+        consola.append("\n");
         i=0;
          while(i<5){
-            System.out.print(cromosoma6.get(i));
+          //  System.out.print(cromosoma6.get(i));
+            consola.append(Integer.toString(cromosoma6.get(i)));
             i++;
         } 
     }
+    
+    
 }
