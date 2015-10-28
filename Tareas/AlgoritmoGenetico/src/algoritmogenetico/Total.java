@@ -18,7 +18,7 @@ public class Total {
     public void imprime(){
         JOptionPane.showMessageDialog(null, "Maximización Total: " +((Math.pow(getX(),2))+(Math.pow(getY(),3))));
     }
-    
+        
     public void setX(int x){
         this.x = x;
     }

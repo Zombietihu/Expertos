@@ -192,7 +192,16 @@ Total tot = new Total();
                 datos.set(i, datos.get(b));
                 fy2.add(pesos.get(b));
             } else {
-                removidos.add(datos.get(b));
+                
+                if (datos.size() <6 ) {
+                    ArrayList<Integer> o = new ArrayList<>();
+                    for (int j = 0; j < 6; j++) {
+                        o.add(0);
+                    }
+                    datos.add(o);
+                }
+                
+                //removidos.add(datos.get(b));
                 pesos.set(b, pesos.get(i));
                 datos.set(b, datos.get(i));
                 fy2.add(pesos.get(i));

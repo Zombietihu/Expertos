@@ -3,12 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TransformersScale;
+package controlador;
+
+import java.util.ArrayList;
+import java.util.Random;
+import Vista.Ventana;
 
 /**
  *
- * @author Tonatihu
+ * @author tonny
  */
-class JPane {
+public class PSOcontrolador {
+
     
+
+    public PSOcontrolador() {
+
+    }
+
+
 }

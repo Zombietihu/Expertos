@@ -62,7 +62,7 @@ public class Frame extends JFrame{
         pane = new JPanel();
         pane.setLayout(null);
         //se crea funcion
-        funcion = new JLabel("f(x,y)=x^2+y^3  1<=x<=32 1<=y<=32");
+        funcion = new JLabel("f(x,y)=x^2+y^3  1<=x<=31 1<=y<=31");
         funcion.setBounds(300,20,300,20);
         //se agregan los JTextArea
        //de x
@@ -83,9 +83,9 @@ public class Frame extends JFrame{
         JScrollPane sc2 = new JScrollPane(genY); 
         sc2.setBounds(new Rectangle(400, 80, 250, 200));
         //Se agregan las etiquetas
-        procesoX = new JLabel("Evolucion X");
+        procesoX = new JLabel("Evolución X");
         procesoX.setBounds(100,60,100,20);
-        procesoY = new JLabel("Evolucion Y");
+        procesoY = new JLabel("Evolución Y");
         procesoY.setBounds(460,60,100,20);
         selecciona = new JLabel("Selecciona Las generaciones");
         selecciona.setBounds(200,320,200,20);
